@@ -1,0 +1,60 @@
+// link in global color file
+@import './colors';
+
+// reset browser defaults
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+// only one device breakpoint needed; mobile-first
+@mixin desktop-breakpoint {
+  @media only screen and (min-width: 900px) {
+    @content;
+  }
+}
+
+html {
+  // to get expected results in using 'rem'
+  font-size: 15px;
+}
+
+body {
+  background-color: $veryLightGray; // change!!
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @include desktop-breakpoint {
+    min-height: 100vh; // center veritcally
+  }
+}
+
+// typography
+.h1-typog {
+  font-size: 26px;
+  line-height: 38px;
+}
+
+.h2-typog {
+  font-size: 22px;
+  line-height: 33px;
+}
+
+.h3-typog {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.h4-typog {
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.body-typog {
+  font-size: 15px;
+  line-height: 25px;
+}
