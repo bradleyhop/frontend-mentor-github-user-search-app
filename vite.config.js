@@ -12,6 +12,9 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
+      // work around for ocktokit:
+      // https://github.com/octokit/octokit.js/issues/2126#issuecomment-1005023857
+      "node-fetch": "isomorphic-fetch",
     },
   },
   css: {
