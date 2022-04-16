@@ -108,6 +108,8 @@ export default {
 .error-not-found {
   color: $error-red;
   font-weight: 700;
+  font-size: 15px;
+  line-height: 22px;
 }
 
 .input-search {
