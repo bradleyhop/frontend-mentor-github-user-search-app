@@ -2,7 +2,6 @@
 import UserCard from "./components/UserCard.vue";
 // access GitHub user api
 import { Octokit } from "@octokit/core";
-const octokit = new Octokit();
 
 export default {
   components: {
@@ -22,6 +21,9 @@ export default {
     // call on the octokit tool to access public user info;
     // will take an argument as defined in the input below later
     fetchApi(search) {
+      // setup octokit object
+      const octokit = new Octokit();
+
       // reset error
       this.error = false;
 

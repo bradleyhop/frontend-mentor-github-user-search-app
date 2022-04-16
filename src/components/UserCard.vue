@@ -67,6 +67,9 @@ export default {
         day: "numeric",
       });
     },
+    twitterLink() {
+      return "https:twitter.com" + this.twitter;
+    },
   },
 };
 </script>
@@ -75,13 +78,13 @@ export default {
   <article class="article-wrapper">
     <img :src="avatar" alt="avatar of GitHub user" class="img-user" />
     <div class="card-header-wrapper">
-      <h1 class="name">{{ name }}</h1>
+      <h1 class="name">{{ name || "Not available" }}</h1>
       <div class="user-link-wrapper">
         <a
           :href="gitHubUrl"
           class="user-link"
           target="_blank"
-          rel="noopener noreferer"
+          rel="noopener noreferrer"
           >@{{ login }}</a
         >
       </div>
@@ -121,9 +124,12 @@ export default {
             alt="icon of external link"
             class="website-icon"
           />
-          <span class="link-text">
-            <a :href="website">{{ website || "Not available" }}</a>
+          <span v-if="website" class="link-text">
+            <a :href="website" target="_blank" rel="noopener noreferrer">{{
+              website
+            }}</a>
           </span>
+          <span v-else class="link-text">Not available</span>
         </div>
       </div>
       <!-- /box-1 -->
@@ -134,8 +140,14 @@ export default {
             alt="twitter icon"
             class="twitter-icon"
           />
-          <!-- set as link, too -->
-          <span class="link-text">{{ twitter || "Not available" }}</span>
+          <a
+            :href="twitterLink"
+            v-if="twitter"
+            class="link-text"
+            rel="noopener noreferrer"
+            >@{{ twitter }}</a
+          >
+          <span v-else class="link-text">Not available</span>
         </div>
         <div class="company-wrapper">
           <img
