@@ -1,9 +1,42 @@
 <script>
 import UserCard from "./components/UserCard.vue";
+// access GitHub user api
+import { Octokit } from "@octokit/core";
+const octokit = new Octokit();
 
 export default {
   components: {
     UserCard,
+  },
+
+  data() {
+    return {
+      data: "",
+      error: false,
+    };
+  },
+
+  methods: {
+    // call on the octokit tool to access public user info;
+    // will take an argument as defined in the input below later
+    fetchApi() {
+      octokit
+        .request("Get /users/{username}", {
+          username: "bradleyhop",
+        })
+        .then((result) => {
+          // See the following for returned object
+          if (result.status === 200) {
+            // console.log(result.data);
+            this.data = result.data;
+          } else {
+            this.error = true;
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
   },
 };
 </script>
@@ -16,8 +49,8 @@ export default {
 
   <main>
     <div class="wrapper-search-bar">
-      <span
-        ><img
+      <span>
+        <img
           src="@/assets/img/icon-search.svg"
           alt="search icon"
           class="search-icon"
@@ -28,10 +61,26 @@ export default {
         placeholder="Search GitHub username..."
         class="input-search"
       />
-      <button class="search-button">Search</button>
+      <button @click="fetchApi" class="search-button">Search</button>
     </div>
 
-    <UserCard />
+    <div v-if="data">
+      <UserCard
+        :name="data.name"
+        :avatar="data.avatar_url"
+        :login="data.login"
+        :gitHubUrl="data.html_url"
+        :dateJoined="data.created_at"
+        :bio="data.bio"
+        :repos="data.public_repos"
+        :followers="data.followers"
+        :followIng="data.folowing"
+        :location="data.location"
+        :website="data.blog"
+        :twitter="data.twitter_username"
+        :company="data.company"
+      />
+    </div>
   </main>
 </template>
 
@@ -41,6 +90,7 @@ export default {
   line-height: 39px;
   font-weight: 700;
 }
+
 .search-icon {
   height: 1.33rem;
   width: 1.33rem;

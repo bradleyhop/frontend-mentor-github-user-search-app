@@ -1,39 +1,107 @@
 <script>
 export default {
   name: "UserCard",
+
+  props: {
+    name: {
+      type: String,
+      required: true,
+    },
+    avatar: {
+      type: String,
+      required: true,
+    },
+    login: {
+      type: String,
+      required: true,
+    },
+    gitHubUrl: {
+      type: String,
+      required: true,
+    },
+    dateJoined: {
+      type: String,
+      required: true,
+    },
+    bio: {
+      type: String,
+      required: true,
+      default: "",
+    },
+    repos: {
+      type: Number,
+      required: true,
+    },
+    followers: {
+      type: Number,
+      required: true,
+    },
+    followIng: {
+      type: Number,
+      required: true,
+    },
+    location: {
+      type: String,
+      required: true,
+    },
+    website: {
+      type: String,
+      required: true,
+    },
+    twitter: {
+      type: String,
+      required: true,
+    },
+    company: {
+      type: String,
+      required: true,
+    },
+  },
+
+  computed: {
+    // convert date string to object; return day month year
+    formatedDate() {
+      return new Date(this.dateJoined).toLocaleString("en-gb", {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      });
+    },
+  },
 };
 </script>
 
 <template>
   <article class="article-wrapper">
-    <img src="" alt="image or icon of git hub user" class="img-user" />
+    <img :src="avatar" alt="avatar of GitHub user" class="img-user" />
     <div class="card-header-wrapper">
-      <h1 class="name">My Name</h1>
+      <h1 class="name">{{ name }}</h1>
       <div class="user-link-wrapper">
-        <a href="" class="user-link">link to user</a>
+        <a
+          :href="gitHubUrl"
+          class="user-link"
+          target="_blank"
+          rel="noopener noreferer"
+          >@{{ login }}</a
+        >
       </div>
-      <div class="join-date">Date</div>
+      <div class="join-date">Joined {{ formatedDate }}</div>
     </div>
     <!-- /card-header-wrapper -->
-    <p class="description-user">
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestias id
-      neque dolor velit beatae accusamus. Explicabo repellendus a obcaecati,
-      omnis nihil facere, aperiam neque quas veritatis possimus necessitatibus
-      aliquid cum!
-    </p>
+    <p class="description-user">{{ bio || "Not available" }}</p>
     <!-- begin stats-container -->
     <div class="stats-container">
       <div class="repo-wrapper">
         <div class="title-stat">Repos</div>
-        <div class="numb-stat">8</div>
+        <div class="numb-stat">{{ repos || 0 }}</div>
       </div>
       <div class="follower-wrapper">
         <div class="title-stat">Followers</div>
-        <div class="numb-stat">120</div>
+        <div class="numb-stat">{{ followers || 0 }}</div>
       </div>
       <div class="following-wrapper">
         <div class="title-stat">Following</div>
-        <div class="numb-stat">333</div>
+        <div class="numb-stat">{{ followIng || 0 }}</div>
       </div>
     </div>
     <!-- /stats-container -->
@@ -45,7 +113,7 @@ export default {
             alt="image of location marker"
             class="location-icon"
           />
-          <span class="link-text"></span>
+          <span class="link-text">{{ location || "Not available" }}</span>
         </div>
         <div class="website-wrapper">
           <img
@@ -53,7 +121,9 @@ export default {
             alt="icon of external link"
             class="website-icon"
           />
-          <span class="link-text"></span>
+          <span class="link-text">
+            <a :href="website">{{ website || "Not available" }}</a>
+          </span>
         </div>
       </div>
       <!-- /box-1 -->
@@ -64,7 +134,8 @@ export default {
             alt="twitter icon"
             class="twitter-icon"
           />
-          <span class="link-text"></span>
+          <!-- set as link, too -->
+          <span class="link-text">{{ twitter || "Not available" }}</span>
         </div>
         <div class="company-wrapper">
           <img
@@ -72,7 +143,7 @@ export default {
             alt="icon of company building"
             class="company-icon"
           />
-          <span class="link-text"></span>
+          <span class="link-text">{{ company || "Not available" }}</span>
         </div>
       </div>
       <!-- /box-2 -->

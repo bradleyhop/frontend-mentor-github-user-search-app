@@ -1,5 +1,5 @@
 // link in global color file
-// @import './colors';
+@import './colors';
 
 // reset browser defaults
 *,
@@ -23,6 +23,7 @@ html {
 }
 
 body {
+  background-color: $light-greyish; // temp color
   display: flex;
   justify-content: center;
 

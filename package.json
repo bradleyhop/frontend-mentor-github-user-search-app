@@ -8,6 +8,8 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "@octokit/core": "^3.6.0",
+    "isomorphic-fetch": "^3.0.0",
     "vue": "^3.2.31"
   },
   "devDependencies": {
