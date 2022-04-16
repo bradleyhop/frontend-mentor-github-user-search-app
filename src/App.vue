@@ -11,6 +11,7 @@ export default {
 
   data() {
     return {
+      userSearch: "",
       data: "",
       error: false,
     };
@@ -19,10 +20,10 @@ export default {
   methods: {
     // call on the octokit tool to access public user info;
     // will take an argument as defined in the input below later
-    fetchApi() {
+    fetchApi(search) {
       octokit
         .request("Get /users/{username}", {
-          username: "bradleyhop",
+          username: search,
         })
         .then((result) => {
           // See the following for returned object
@@ -60,8 +61,12 @@ export default {
         type="text"
         placeholder="Search GitHub username..."
         class="input-search"
+        v-model="userSearch"
+        @keyup.enter="fetchApi(userSearch)"
       />
-      <button @click="fetchApi" class="search-button">Search</button>
+      <button @click="fetchApi(userSearch)" class="search-button">
+        Search
+      </button>
     </div>
 
     <div v-if="data">
