@@ -14,6 +14,7 @@ export default {
       userSearch: "",
       data: "",
       error: false,
+      errorMessage: "",
     };
   },
 
@@ -21,21 +22,23 @@ export default {
     // call on the octokit tool to access public user info;
     // will take an argument as defined in the input below later
     fetchApi(search) {
+      // reset error
+      this.error = false;
+
+      // fetch user data
       octokit
         .request("Get /users/{username}", {
           username: search,
         })
         .then((result) => {
           // See the following for returned object
-          if (result.status === 200) {
-            // console.log(result.data);
-            this.data = result.data;
-          } else {
-            this.error = true;
-          }
+          // console.log(result.data);
+          this.data = result.data;
         })
-        .catch((error) => {
-          console.log(error);
+        // Will catch status 404, etc
+        .catch(() => {
+          this.error = true;
+          this.errorMessage = "Not found";
         });
     },
   },
@@ -64,6 +67,7 @@ export default {
         v-model="userSearch"
         @keyup.enter="fetchApi(userSearch)"
       />
+      <span v-if="error" class="error-not-found">{{ errorMessage }}</span>
       <button @click="fetchApi(userSearch)" class="search-button">
         Search
       </button>
@@ -99,6 +103,13 @@ export default {
 .search-icon {
   height: 1.33rem;
   width: 1.33rem;
+}
+
+.error-not-found {
+  color: $error-red;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 22px;
 }
 
 .input-search {
