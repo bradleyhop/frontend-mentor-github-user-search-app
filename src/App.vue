@@ -20,7 +20,7 @@ export default {
   methods: {
     // call on the octokit tool to access public user info;
     // will take an argument as defined in the input below later
-    fetchApi(search) {
+    fetchApi(searchUser) {
       // setup octokit object
       const octokit = new Octokit();
 
@@ -30,7 +30,7 @@ export default {
       // fetch user data
       octokit
         .request("Get /users/{username}", {
-          username: search,
+          username: searchUser,
         })
         .then((result) => {
           // See the following for returned object
@@ -54,7 +54,7 @@ export default {
   </header>
 
   <main>
-    <div class="wrapper-search-bar">
+    <div class="search-bar-wrapper">
       <span>
         <img
           src="@/assets/img/icon-search.svg"
@@ -96,7 +96,16 @@ export default {
 </template>
 
 <style lang="scss">
+body {
+  background-color: var(--primary-bg);
+}
+
+.search-bar-wrapper {
+  background-color: var(--secondary-bg);
+}
+
 .header-title {
+  color: var(--secondary-text);
   font-size: 26px;
   line-height: 39px;
   font-weight: 700;
@@ -120,8 +129,19 @@ export default {
 }
 
 .search-button {
+  // same colors for both themes
+  background-color: $bright-blue;
+  color: #fff;
+  border-style: none;
+  border-radius: 0.67rem;
+  font-weight: 700;
+  // mobile
   font-size: 14px;
   line-height: 21px;
-  font-weight: 700;
+  padding: 0.83rem 1.2rem;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 </style>

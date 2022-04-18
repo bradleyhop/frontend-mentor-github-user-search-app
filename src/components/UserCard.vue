@@ -26,7 +26,6 @@ export default {
     bio: {
       type: String,
       required: true,
-      default: "",
     },
     repos: {
       type: Number,
@@ -124,10 +123,14 @@ export default {
             alt="icon of external link"
             class="website-icon"
           />
-          <span v-if="website" class="link-text">
-            <a :href="website" target="_blank" rel="noopener noreferrer">{{
-              website
-            }}</a>
+          <span v-if="website">
+            <a
+              :href="website"
+              class="link-text"
+              target="_blank"
+              rel="noopener noreferrer"
+              >{{ website }}</a
+            >
           </span>
           <span v-else class="link-text">Not available</span>
         </div>
@@ -164,6 +167,10 @@ export default {
 </template>
 
 <style lang="scss">
+.article-wrapper {
+  background-color: var(--secondary-bg);
+}
+
 .img-user {
   height: 4.67rem;
   width: 4.67rem;
@@ -171,37 +178,44 @@ export default {
 }
 
 .name {
+  color: var(--secondary-text);
   font-size: 16px;
   line-height: 24px;
 }
 
 .user-link {
+  color: $bright-blue;
   font-size: 13px;
   line-height: 19px;
 }
 
 .join-date {
+  color: var(--primary-text);
   font-size: 13px;
   line-height: 19px;
 }
 
 .description-user {
+  color: var(--primary-text);
   font-size: 13px;
   line-height: 25px;
 }
 
 .stats-container {
+  background-color: var(--primary-bg);
   display: grid;
   // same layout for all devices
   grid-template-columns: repeat(3, 1fr);
 }
 
 .title-stat {
+  color: var(--secondary-text);
   font-size: 11px;
   line-height: 16px;
 }
 
 .numb-stat {
+  color: var(--secondary-text);
   font-size: 16px;
   line-height: 24px;
   font-weight: 700;
@@ -232,6 +246,7 @@ export default {
 }
 
 .link-text {
+  color: var(--primary-text);
   font-size: 13px;
   line-height: 19px;
 }
