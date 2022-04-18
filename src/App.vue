@@ -10,10 +10,11 @@ export default {
 
   data() {
     return {
-      userSearch: "",
-      data: "",
-      error: false,
-      errorMessage: "",
+      light: "light", // light or dark theme
+      userSearch: "", // user input search
+      data: "", // data returned by GitHub api
+      error: false, // check if error returned
+      errorMessage: "Not found", // default error message
     };
   },
 
@@ -40,17 +41,32 @@ export default {
         // Will catch status 404, etc
         .catch(() => {
           this.error = true;
-          this.errorMessage = "Not found";
         });
+    },
+    changeTheme() {
+      // conditionally render button content on click
+      this.light = this.light === "light" ? "dark" : "light";
+
+      // html tag has attribute with which to set the app theme
+      const currentTheme = document.documentElement.getAttribute("data-theme");
+      document.documentElement.setAttribute(
+        "data-theme",
+        currentTheme === "light" ? "dark" : "light"
+      );
     },
   },
 };
 </script>
 
 <template>
-  <header>
+  <header class="header-wrapper">
     <h1 class="header-title">devfinder</h1>
-    <div class="d-l-mode"></div>
+    <button class="theme-button" @click="changeTheme">
+      <span v-if="light === 'light'"
+        >Dark <img src="@/assets/img/icon-moon.svg"
+      /></span>
+      <span v-else>Light <img src="@/assets/img/icon-sun.svg" /></span>
+    </button>
   </header>
 
   <main>
@@ -98,6 +114,17 @@ export default {
 <style lang="scss">
 body {
   background-color: var(--primary-bg);
+}
+
+.header-wrapper {
+  display: inline-flex;
+}
+
+.theme-button {
+  background-color: var(--primary-bg);
+  border: none;
+  color: var(--primary-text);
+  cursor: pointer;
 }
 
 .search-bar-wrapper {

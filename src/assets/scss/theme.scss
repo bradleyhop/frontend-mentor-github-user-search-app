@@ -8,7 +8,7 @@
 // NOTE: must wrap sass variables for CSS var to parse; see ->
 // https://sass-lang.com/documentation/breaking-changes/css-vars
 :root,
-:root.light {
+html[data-theme="light"] {
   --primary-bg: #{$light-greyish};
   --secondary-bg: #{$light-whiteish};
   --button-theme: #{$light-bluegrey};
@@ -17,7 +17,7 @@
   --not-available: #{$light-greyish}; // same as primary bg
 }
 
-:root.dark {
+html[data-theme="dark"] {
   --primary-bg: #{$dark-blackish};
   --secondary-bg: #{$dark-greyish};
   --button-theme: #{$dark-white};

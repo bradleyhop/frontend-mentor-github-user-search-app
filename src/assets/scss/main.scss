@@ -9,6 +9,9 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+
+  // only font in project
+  font-family: "Space Mono", monospace;
 }
 
 // TODO: add in breakpoints later
@@ -26,9 +29,6 @@ html {
 body {
   display: flex;
   justify-content: center;
-
-  // only font in project
-  font-family: "Space Mono", monospace;
 
   @include desktop-breakpoint {
     // center veritcally
