@@ -1,0 +1,27 @@
+/*
+ * CSS class and variables for light and dark themes
+ */
+
+// colors as defined in design system
+@import "colors.scss";
+
+// NOTE: must wrap sass variables for CSS var to parse; see ->
+// https://sass-lang.com/documentation/breaking-changes/css-vars
+:root,
+:root.light {
+  --primary-bg: #{$light-greyish};
+  --secondary-bg: #{$light-whiteish};
+  --button-theme: #{$light-bluegrey};
+  --primary-text: #{$light-blueish};
+  --secondary-text: #{$light-blackish};
+  --not-available: #{$light-greyish}; // same as primary bg
+}
+
+:root.dark {
+  --primary-bg: #{$dark-blackish};
+  --secondary-bg: #{$dark-greyish};
+  --button-theme: #{$dark-white};
+  --primary-text: #{$dark-white};
+  --secondary-text: #{$dark-white};
+  --not-available: #{$light-greyish}; // same as light theme
+}

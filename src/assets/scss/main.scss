@@ -1,5 +1,6 @@
-// link in global color file
-@import './colors';
+/*
+ * Sets project defaults, globals, media query breakpoints, and app layout
+ */
 
 // reset browser defaults
 *,
@@ -10,7 +11,7 @@
   box-sizing: border-box;
 }
 
-// only one device breakpoint needed; mobile-first
+// TODO: add in breakpoints later
 @mixin desktop-breakpoint {
   @media only screen and (min-width: 900px) {
     @content;
@@ -23,7 +24,6 @@ html {
 }
 
 body {
-  background-color: $light-greyish; // temp color
   display: flex;
   justify-content: center;
 
@@ -34,5 +34,13 @@ body {
     // center veritcally
     align-items: center;
     min-height: 100vh;
+  }
+}
+
+a {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
   }
 }
