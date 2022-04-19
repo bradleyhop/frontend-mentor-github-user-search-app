@@ -1,4 +1,5 @@
 <script>
+// component rendered after successful user search
 import UserCard from "./components/UserCard.vue";
 // access GitHub user api
 import { Octokit } from "@octokit/core";
@@ -101,7 +102,7 @@ export default {
         :bio="data.bio"
         :repos="data.public_repos"
         :followers="data.followers"
-        :followIng="data.folowing"
+        :followIng="data.following"
         :location="data.location"
         :website="data.blog"
         :twitter="data.twitter_username"

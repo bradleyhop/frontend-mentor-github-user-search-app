@@ -3,10 +3,7 @@ export default {
   name: "UserCard",
 
   props: {
-    name: {
-      type: String,
-      required: true,
-    },
+    // these properties are required to have a GitHub account
     avatar: {
       type: String,
       required: true,
@@ -23,37 +20,34 @@ export default {
       type: String,
       required: true,
     },
+    // additional info a GitHub user may provide; returns null if not explicitly
+    //  defined by GitHub user
+    name: {
+      type: String,
+    },
     bio: {
       type: String,
-      required: true,
     },
     repos: {
       type: Number,
-      required: true,
     },
     followers: {
       type: Number,
-      required: true,
     },
     followIng: {
       type: Number,
-      required: true,
     },
     location: {
       type: String,
-      required: true,
     },
     website: {
       type: String,
-      required: true,
     },
     twitter: {
       type: String,
-      required: true,
     },
     company: {
       type: String,
-      required: true,
     },
   },
 
@@ -67,7 +61,7 @@ export default {
       });
     },
     twitterLink() {
-      return "https:twitter.com" + this.twitter;
+      return this.twitter ? "https:twitter.com" + this.twitter : null;
     },
   },
 };
@@ -77,7 +71,9 @@ export default {
   <article class="article-wrapper">
     <img :src="avatar" alt="avatar of GitHub user" class="img-user" />
     <div class="card-header-wrapper">
-      <h1 class="name">{{ name || "Not available" }}</h1>
+      <h1 class="name" :class="{ 'not-available': !name }">
+        {{ name || "Not available" }}
+      </h1>
       <div class="user-link-wrapper">
         <a
           :href="gitHubUrl"
@@ -90,20 +86,28 @@ export default {
       <div class="join-date">Joined {{ formatedDate }}</div>
     </div>
     <!-- /card-header-wrapper -->
-    <p class="description-user">{{ bio || "Not available" }}</p>
+    <p class="description-user" :class="{ 'not-available': !bio }">
+      {{ bio || "Not available" }}
+    </p>
     <!-- begin stats-container -->
     <div class="stats-container">
       <div class="repo-wrapper">
         <div class="title-stat">Repos</div>
-        <div class="numb-stat">{{ repos || 0 }}</div>
+        <div class="numb-stat" :class="{ 'not-available': !repos }">
+          {{ repos || 0 }}
+        </div>
       </div>
       <div class="follower-wrapper">
         <div class="title-stat">Followers</div>
-        <div class="numb-stat">{{ followers || 0 }}</div>
+        <div class="numb-stat" :class="{ 'not-available': !followers }">
+          {{ followers || 0 }}
+        </div>
       </div>
       <div class="following-wrapper">
         <div class="title-stat">Following</div>
-        <div class="numb-stat">{{ followIng || 0 }}</div>
+        <div class="numb-stat" :class="{ 'not-available': !followIng }">
+          {{ followIng || 0 }}
+        </div>
       </div>
     </div>
     <!-- /stats-container -->
@@ -115,7 +119,9 @@ export default {
             alt="image of location marker"
             class="location-icon"
           />
-          <span class="link-text">{{ location || "Not available" }}</span>
+          <span class="link-text" :class="{ 'not-available': !location }">{{
+            location || "Not available"
+          }}</span>
         </div>
         <div class="website-wrapper">
           <img
@@ -132,7 +138,7 @@ export default {
               >{{ website }}</a
             >
           </span>
-          <span v-else class="link-text">Not available</span>
+          <span v-else class="link-text not-available">Not available</span>
         </div>
       </div>
       <!-- /box-1 -->
@@ -150,7 +156,7 @@ export default {
             rel="noopener noreferrer"
             >@{{ twitter }}</a
           >
-          <span v-else class="link-text">Not available</span>
+          <span v-else class="link-text not-available">Not available</span>
         </div>
         <div class="company-wrapper">
           <img
@@ -158,7 +164,9 @@ export default {
             alt="icon of company building"
             class="company-icon"
           />
-          <span class="link-text">{{ company || "Not available" }}</span>
+          <span class="link-text" :class="{ 'not-available': !company }">{{
+            company || "Not available"
+          }}</span>
         </div>
       </div>
       <!-- /box-2 -->
@@ -167,14 +175,23 @@ export default {
 </template>
 
 <style lang="scss">
+// default text color for both dark and light themes for properties not defined
+$not-available-text: $light-greyish;
+
+// decrease color opacity for icons and text when property is falsey
+.not-available {
+  opacity: 0.5;
+}
+
 .article-wrapper {
   background-color: var(--secondary-bg);
 }
 
 .img-user {
+  background-color: $light-greyish;
   height: 4.67rem;
   width: 4.67rem;
-  border-radius: 50%; // may not be needed
+  border-radius: 50%;
 }
 
 .name {
