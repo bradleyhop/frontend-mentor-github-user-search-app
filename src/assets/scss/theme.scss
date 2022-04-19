@@ -14,7 +14,6 @@ html[data-theme="light"] {
   --button-theme: #{$light-bluegrey};
   --primary-text: #{$light-blueish};
   --secondary-text: #{$light-blackish};
-  --not-available: #{$light-greyish}; // same as primary bg
 }
 
 html[data-theme="dark"] {
@@ -23,5 +22,4 @@ html[data-theme="dark"] {
   --button-theme: #{$dark-white};
   --primary-text: #{$dark-white};
   --secondary-text: #{$dark-white};
-  --not-available: #{$light-greyish}; // same as light theme
 }
