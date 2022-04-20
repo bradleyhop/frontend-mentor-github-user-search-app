@@ -16,10 +16,37 @@
   font-family: "Space Mono", monospace;
 }
 
-// TODO: add in breakpoints later
-@mixin desktop-breakpoint {
-  @media only screen and (min-width: 900px) {
+// breakpoints
+// NOTE: no mobile breakpoint because that is the default
+@mixin tablet-breakpoint {
+  @media only screen and (min-width: 768px) {
     @content;
+  }
+}
+
+@mixin desktop-breakpoint {
+  @media only screen and (min-width: 1280px) {
+    @content;
+  }
+}
+
+@mixin large-desktop-breakpoint {
+  @media only screen and (min-width: 1920px) {
+    @content;
+  }
+}
+
+// set max-widths for content
+.device-widths {
+  width: 90%;
+  margin: auto;
+
+  @include desktop-breakpoint {
+    width: 75%;
+  }
+
+  @include large-desktop-breakpoint {
+    width: 60%;
   }
 }
 
@@ -39,6 +66,7 @@ body {
   }
 }
 
+// samde design for all links
 a {
   text-decoration: none;
 

@@ -11,9 +11,9 @@ export default {
 
   data() {
     return {
-      light: "light", // light or dark theme
+      light: true, // light or dark theme
       userSearch: "", // user input search
-      data: "", // data returned by GitHub api
+      data: null, // data returned by GitHub api
       error: false, // check if error returned
       errorMessage: "Not found", // default error message
     };
@@ -44,9 +44,13 @@ export default {
           this.error = true;
         });
     },
+
+    // change user theme from light to dark as defined by the 'data-theme'
+    // attribute on the <html> tag; also changes component data to indicate
+    // light or dark theme applied, which will change button state
     changeTheme() {
       // conditionally render button content on click
-      this.light = this.light === "light" ? "dark" : "light";
+      this.light = this.light ? false : true;
 
       // html tag has attribute with which to set the app theme
       const currentTheme = document.documentElement.getAttribute("data-theme");
@@ -62,12 +66,20 @@ export default {
 <template>
   <header class="header-wrapper">
     <h1 class="header-title">devfinder</h1>
-    <button class="theme-button" @click="changeTheme">
-      <span v-if="light === 'light'"
-        >Dark <img src="@/assets/img/icon-moon.svg"
+
+    <button v-if="light" class="theme-button" @click="changeTheme">
+      <span class="button-text">Dark&nbsp;</span
+      ><span class="button-img-container"
+        ><img class="button-img" src="@/assets/img/icon-moon.svg"
       /></span>
-      <span v-else>Light <img src="@/assets/img/icon-sun.svg" /></span>
     </button>
+    <button v-else class="theme-button" @click="changeTheme">
+      <span class="button-text">Light&nbsp;</span
+      ><span class="button-img-container">
+        <img src="@/assets/img/icon-sun.svg" class="button-img"
+      /></span>
+    </button>
+    <!-- /v-iv /v-else -->
   </header>
 
   <main>
@@ -118,7 +130,10 @@ body {
 }
 
 .header-wrapper {
-  display: inline-flex;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  margin: 2rem 0 2.4rem 0;
 }
 
 .theme-button {
@@ -126,10 +141,27 @@ body {
   border: none;
   color: var(--primary-text);
   cursor: pointer;
+  justify-self: end;
+  display: flex;
+}
+
+.button-text {
+  align-self: center;
+}
+
+.button-img-container {
+  display: flex;
+}
+
+.button-img {
+  align-self: center;
 }
 
 .search-bar-wrapper {
   background-color: var(--secondary-bg);
+  margin-bottom: 1rem;
+  border-radius: 1rem;
+  box-shadow: 0px 16px 30px -10px rgba(70, 96, 187, 0.198567);
 }
 
 .header-title {
