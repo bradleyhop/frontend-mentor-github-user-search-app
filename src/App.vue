@@ -15,7 +15,7 @@ export default {
       userSearch: "", // user input search
       data: null, // data returned by GitHub api
       error: false, // check if error returned
-      errorMessage: "Not found", // default error message
+      errorMessage: "No results", // default error message
     };
   },
 
@@ -83,8 +83,8 @@ export default {
   </header>
 
   <main>
-    <div class="search-bar-wrapper">
-      <span>
+    <div class="search-bar-wrapper" :class="{ 'box-shadow': light }">
+      <span class="search-icon-wrapper">
         <img
           src="@/assets/img/icon-search.svg"
           alt="search icon"
@@ -119,6 +119,7 @@ export default {
         :website="data.blog"
         :twitter="data.twitter_username"
         :company="data.company"
+        :lightTheme="this.light"
       />
     </div>
   </main>
@@ -159,9 +160,12 @@ body {
 
 .search-bar-wrapper {
   background-color: var(--secondary-bg);
+  cursor: pointer;
   margin-bottom: 1rem;
   border-radius: 1rem;
-  box-shadow: 0px 16px 30px -10px rgba(70, 96, 187, 0.198567);
+  padding: 0.5rem;
+  display: flex;
+  align-content: center;
 }
 
 .header-title {
@@ -171,9 +175,15 @@ body {
   font-weight: 700;
 }
 
+.search-icon-wrapper {
+  padding: 0.5rem;
+  display: flex;
+}
+
 .search-icon {
   height: 1.33rem;
   width: 1.33rem;
+  align-self: center;
 }
 
 .error-not-found {
@@ -181,11 +191,23 @@ body {
   font-weight: 700;
   font-size: 15px;
   line-height: 22px;
+  min-width: 12ch;
+  display: flex;
+  align-self: center;
 }
 
 .input-search {
+  background-color: inherit;
+  color: var(--primary-text);
   font-size: 13px;
   line-height: 25px;
+  width: 100%;
+  border: none;
+  outline: none;
+
+  &:focus {
+    outline: none;
+  }
 }
 
 .search-button {
