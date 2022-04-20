@@ -141,8 +141,8 @@ body {
   border: none;
   color: var(--primary-text);
   cursor: pointer;
-  justify-self: end;
-  display: flex;
+  justify-self: end; // in relation to parent's grid
+  display: flex; // to help with centering in children
 }
 
 .button-text {

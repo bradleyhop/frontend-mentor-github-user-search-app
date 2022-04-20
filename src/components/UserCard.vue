@@ -71,42 +71,48 @@ export default {
 
 <template>
   <article class="article-wrapper">
-    <img :src="avatar" alt="avatar of GitHub user" class="img-user" />
     <div class="card-header-wrapper">
-      <h1 class="name" :class="{ 'not-available': !name }">
-        {{ name || "Not available" }}
-      </h1>
-      <div class="user-link-wrapper">
-        <a
-          :href="gitHubUrl"
-          class="user-link"
-          target="_blank"
-          rel="noopener noreferrer"
-          >@{{ login }}</a
-        >
+      <img :src="avatar" alt="avatar of GitHub user" class="img-user" />
+      <div class="header-content">
+        <h1 class="name" :class="{ 'not-available': !name }">
+          {{ name || "Not available" }}
+        </h1>
+        <div class="user-link-wrapper">
+          <a
+            :href="gitHubUrl"
+            class="user-link"
+            target="_blank"
+            rel="noopener noreferrer"
+            >@{{ login }}</a
+          >
+        </div>
+        <div class="join-date">Joined {{ formatedDate }}</div>
       </div>
-      <div class="join-date">Joined {{ formatedDate }}</div>
     </div>
     <!-- /card-header-wrapper -->
-    <p class="description-user" :class="{ 'not-available': !bio }">
+
+    <p class="user-bio" :class="{ 'not-available': !bio }">
       {{ bio || "Not available" }}
     </p>
-    <!-- begin stats-container -->
     <div class="stats-container">
       <div class="repo-wrapper">
-        <div class="title-stat">Repos</div>
+        <div class="title-stat" :class="{ 'not-availble': !repos }">Repos</div>
         <div class="numb-stat" :class="{ 'not-available': !repos }">
           {{ repos || 0 }}
         </div>
       </div>
       <div class="follower-wrapper">
-        <div class="title-stat">Followers</div>
+        <div class="title-stat" :class="{ 'not-available': !followers }">
+          Followers
+        </div>
         <div class="numb-stat" :class="{ 'not-available': !followers }">
           {{ followers || 0 }}
         </div>
       </div>
       <div class="following-wrapper">
-        <div class="title-stat">Following</div>
+        <div class="title-stat" :class="{ 'not-available': !followIng }">
+          Following
+        </div>
         <div class="numb-stat" :class="{ 'not-available': !followIng }">
           {{ followIng || 0 }}
         </div>
@@ -115,22 +121,26 @@ export default {
     <!-- /stats-container -->
     <div class="link-container">
       <div class="link-box-1">
-        <div class="location-wrapper">
-          <img
-            src="@/assets/img/icon-location.svg"
-            alt="image of location marker"
-            class="location-icon"
-          />
+        <div class="link-wrapper">
+          <span class="stats-icon-wrapper">
+            <img
+              src="@/assets/img/icon-location.svg"
+              alt="image of location marker"
+              class="location-icon"
+            />
+          </span>
           <span class="link-text" :class="{ 'not-available': !location }">{{
             location || "Not available"
           }}</span>
         </div>
-        <div class="website-wrapper">
-          <img
-            src="@/assets/img/icon-website.svg"
-            alt="icon of external link"
-            class="website-icon"
-          />
+        <div class="link-wrapper">
+          <span class="stats-icon-wrapper">
+            <img
+              src="@/assets/img/icon-website.svg"
+              alt="icon of external link"
+              class="website-icon"
+            />
+          </span>
           <span v-if="website">
             <a
               :href="website"
@@ -145,12 +155,14 @@ export default {
       </div>
       <!-- /box-1 -->
       <div class="links-box-2">
-        <div class="twitter-wrapper">
-          <img
-            src="@/assets/img/icon-twitter.svg"
-            alt="twitter icon"
-            class="twitter-icon"
-          />
+        <div class="link-wrapper">
+          <span class="stats-icon-wrapper">
+            <img
+              src="@/assets/img/icon-twitter.svg"
+              alt="twitter icon"
+              class="twitter-icon"
+            />
+          </span>
           <a
             :href="twitterLink"
             v-if="twitter"
@@ -160,12 +172,14 @@ export default {
           >
           <span v-else class="link-text not-available">Not available</span>
         </div>
-        <div class="company-wrapper">
-          <img
-            src="@/assets/img/icon-company.svg"
-            alt="icon of company building"
-            class="company-icon"
-          />
+        <div class="link-wrapper">
+          <span class="stats-icon-wrapper">
+            <img
+              src="@/assets/img/icon-company.svg"
+              alt="icon of company building"
+              class="company-icon"
+            />
+          </span>
           <span class="link-text" :class="{ 'not-available': !company }">{{
             company || "Not available"
           }}</span>
@@ -177,9 +191,6 @@ export default {
 </template>
 
 <style lang="scss">
-// default text color for both dark and light themes for properties not defined
-$not-available-text: $light-greyish;
-
 // decrease color opacity for icons and text when property is falsey
 .not-available {
   opacity: 0.5;
@@ -188,7 +199,15 @@ $not-available-text: $light-greyish;
 .article-wrapper {
   background-color: var(--secondary-bg);
   border-radius: 1rem;
+  padding: 1.6rem;
   box-shadow: 0px 16px 30px -10px rgba(70, 96, 187, 0.198567);
+}
+
+.card-header-wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin-top: 0.53rem;
+  margin-bottom: 2.2rem;
 }
 
 .img-user {
@@ -217,23 +236,29 @@ $not-available-text: $light-greyish;
   line-height: 19px;
 }
 
-.description-user {
+.user-bio {
   color: var(--primary-text);
   font-size: 13px;
   line-height: 25px;
+  margin-bottom: 2.2rem;
 }
 
 .stats-container {
   background-color: var(--primary-bg);
+  border-radius: 0.67rem;
   display: grid;
   // same layout for all devices
   grid-template-columns: repeat(3, 1fr);
+  padding: 1rem;
+  text-align: center;
+  margin-bottom: 1.6rem;
 }
 
 .title-stat {
   color: var(--secondary-text);
   font-size: 11px;
   line-height: 16px;
+  margin-bottom: 0.5rem;
 }
 
 .numb-stat {
@@ -271,5 +296,15 @@ $not-available-text: $light-greyish;
   color: var(--primary-text);
   font-size: 13px;
   line-height: 19px;
+  vertical-align: middle;
+}
+
+.link-wrapper {
+  margin-bottom: 1rem;
+}
+
+.stats-icon-wrapper {
+  display: inline-block;
+  width: 2.5rem;
 }
 </style>
