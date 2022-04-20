@@ -20,8 +20,8 @@ export default {
       type: String,
       required: true,
     },
-    // additional info a GitHub user may provide; returns null if not explicitly
-    //  defined by GitHub user
+    // additional info a GitHub user may provide; returns falsey if not explicitly
+    // defined by GitHub user
     name: {
       type: String,
     },
@@ -60,6 +60,8 @@ export default {
         day: "numeric",
       });
     },
+
+    // format twitter user account link
     twitterLink() {
       return this.twitter ? "https:twitter.com" + this.twitter : null;
     },
@@ -185,6 +187,8 @@ $not-available-text: $light-greyish;
 
 .article-wrapper {
   background-color: var(--secondary-bg);
+  border-radius: 1rem;
+  box-shadow: 0px 16px 30px -10px rgba(70, 96, 187, 0.198567);
 }
 
 .img-user {
@@ -192,6 +196,7 @@ $not-available-text: $light-greyish;
   height: 4.67rem;
   width: 4.67rem;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .name {
