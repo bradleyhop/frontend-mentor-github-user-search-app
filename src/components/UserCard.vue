@@ -49,6 +49,11 @@ export default {
     company: {
       type: String,
     },
+    // for the drop show on light theme
+    lightTheme: {
+      type: Boolean,
+      required: true,
+    },
   },
 
   computed: {
@@ -70,7 +75,7 @@ export default {
 </script>
 
 <template>
-  <article class="article-wrapper">
+  <article class="article-wrapper" :class="{ 'box-shadow': lightTheme }">
     <div class="card-header-wrapper">
       <img :src="avatar" alt="avatar of GitHub user" class="img-user" />
       <div class="header-content">
@@ -96,7 +101,7 @@ export default {
     </p>
     <div class="stats-container">
       <div class="repo-wrapper">
-        <div class="title-stat" :class="{ 'not-availble': !repos }">Repos</div>
+        <div class="title-stat" :class="{ 'not-available': !repos }">Repos</div>
         <div class="numb-stat" :class="{ 'not-available': !repos }">
           {{ repos || 0 }}
         </div>
@@ -127,6 +132,7 @@ export default {
               src="@/assets/img/icon-location.svg"
               alt="image of location marker"
               class="location-icon"
+              :class="{ 'not-available': !location }"
             />
           </span>
           <span class="link-text" :class="{ 'not-available': !location }">{{
@@ -139,6 +145,7 @@ export default {
               src="@/assets/img/icon-website.svg"
               alt="icon of external link"
               class="website-icon"
+              :class="{ 'not-available': !website }"
             />
           </span>
           <span v-if="website">
@@ -161,6 +168,7 @@ export default {
               src="@/assets/img/icon-twitter.svg"
               alt="twitter icon"
               class="twitter-icon"
+              :class="{ 'not-available': !twitter }"
             />
           </span>
           <a
@@ -178,6 +186,7 @@ export default {
               src="@/assets/img/icon-company.svg"
               alt="icon of company building"
               class="company-icon"
+              :class="{ 'not-available': !company }"
             />
           </span>
           <span class="link-text" :class="{ 'not-available': !company }">{{
@@ -200,7 +209,6 @@ export default {
   background-color: var(--secondary-bg);
   border-radius: 1rem;
   padding: 1.6rem;
-  box-shadow: 0px 16px 30px -10px rgba(70, 96, 187, 0.198567);
 }
 
 .card-header-wrapper {
@@ -301,6 +309,8 @@ export default {
 
 .link-wrapper {
   margin-bottom: 1rem;
+  display: flex;
+  align-content: center;
 }
 
 .stats-icon-wrapper {
