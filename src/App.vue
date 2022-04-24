@@ -20,8 +20,10 @@ export default {
   },
 
   methods: {
-    // call on the octokit tool to access public user info;
-    // will take an argument as defined in the input below later
+    /*
+     * call on the octokit tool to access public user info;
+     * will take an argument as defined in the v-bind input: userSearch
+     */
     fetchApi(searchUser) {
       // setup octokit object
       const octokit = new Octokit();
@@ -35,7 +37,6 @@ export default {
           username: searchUser,
         })
         .then((result) => {
-          // See the following for returned object
           // console.log(result.data);
           this.data = result.data;
         })
@@ -45,9 +46,11 @@ export default {
         });
     },
 
-    // change user theme from light to dark as defined by the 'data-theme'
-    // attribute on the <html> tag; also changes component data to indicate
-    // light or dark theme applied, which will change button state
+    /*
+     * change user theme from light to dark as defined by the 'data-theme'
+     * attribute on the <html> tag; also changes component data to indicate
+     * light or dark theme applied, which will change button state
+     */
     changeTheme() {
       // conditionally render button content on click
       this.light = this.light ? false : true;
@@ -160,7 +163,6 @@ body {
 
 .search-bar-wrapper {
   background-color: var(--secondary-bg);
-  cursor: pointer;
   margin-bottom: 1rem;
   border-radius: 1rem;
   padding: 0.5rem;
@@ -208,6 +210,10 @@ body {
   &:focus {
     outline: none;
   }
+
+  @include tablet-breakpoint {
+    font-size: 18px;
+  }
 }
 
 .search-button {
@@ -224,6 +230,11 @@ body {
 
   &:hover {
     cursor: pointer;
+  }
+
+  @include tablet-breakpoint {
+    font-size: 16px;
+    line-height: 24px;
   }
 }
 </style>
