@@ -49,7 +49,7 @@ export default {
     company: {
       type: String,
     },
-    // for the drop show on light theme
+    // for the drop shadow on light theme
     lightTheme: {
       type: Boolean,
       required: true,
@@ -77,7 +77,9 @@ export default {
 <template>
   <article class="article-wrapper" :class="{ 'box-shadow': lightTheme }">
     <div class="card-header-wrapper">
-      <img :src="avatar" alt="avatar of GitHub user" class="img-user" />
+      <div class="wrapper-img-user">
+        <img :src="avatar" alt="avatar of GitHub user" class="img-user" />
+      </div>
       <div class="header-content">
         <h1 class="name" :class="{ 'not-available': !name }">
           {{ name || "Not available" }}
@@ -200,6 +202,11 @@ export default {
 </template>
 
 <style lang="scss">
+// align card content to not be under user avatar in desktop
+@mixin shift-left {
+  margin-left: 10rem;
+}
+
 // decrease color opacity for icons and text when property is falsey
 .not-available {
   opacity: 0.5;
@@ -212,36 +219,61 @@ export default {
 }
 
 .card-header-wrapper {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
   margin-top: 0.53rem;
   margin-bottom: 2.2rem;
 }
 
 .img-user {
-  background-color: $light-greyish;
   height: 4.67rem;
-  width: 4.67rem;
+  width: auto;
   border-radius: 50%;
   object-fit: cover;
+
+  @include tablet-breakpoint {
+    height: 7.8rem;
+    width: auto;
+  }
+}
+
+.header-content {
+  margin-left: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
 }
 
 .name {
   color: var(--secondary-text);
   font-size: 16px;
   line-height: 24px;
+
+  @include tablet-breakpoint {
+    font-size: 26px;
+    line-height: 39px;
+  }
 }
 
 .user-link {
   color: $bright-blue;
   font-size: 13px;
   line-height: 19px;
+
+  @include tablet-breakpoint {
+    font-size: 16px;
+    line-height: 24px;
+  }
 }
 
 .join-date {
   color: var(--primary-text);
   font-size: 13px;
   line-height: 19px;
+
+  @include tablet-breakpoint {
+    font-size: 15px;
+    line-height: 22px;
+  }
 }
 
 .user-bio {
@@ -249,6 +281,15 @@ export default {
   font-size: 13px;
   line-height: 25px;
   margin-bottom: 2.2rem;
+
+  @include tablet-breakpoint {
+    font-size: 15px;
+    line-height: 25px;
+  }
+
+  @include desktop-breakpoint {
+    @include shift-left;
+  }
 }
 
 .stats-container {
@@ -257,9 +298,17 @@ export default {
   display: grid;
   // same layout for all devices
   grid-template-columns: repeat(3, 1fr);
-  padding: 1rem;
-  text-align: center;
+  padding: 1rem 2rem;
   margin-bottom: 1.6rem;
+  text-align: center;
+
+  @include tablet-breakpoint {
+    text-align: left;
+  }
+
+  @include desktop-breakpoint {
+    @include shift-left;
+  }
 }
 
 .title-stat {
@@ -267,6 +316,11 @@ export default {
   font-size: 11px;
   line-height: 16px;
   margin-bottom: 0.5rem;
+
+  @include tablet-breakpoint {
+    font-size: 13px;
+    line-height: 19.25px;
+  }
 }
 
 .numb-stat {
@@ -274,10 +328,24 @@ export default {
   font-size: 16px;
   line-height: 24px;
   font-weight: 700;
+
+  @include tablet-breakpoint {
+    font-size: 22px;
+    line-height: 33px;
+  }
 }
 
 .link-container {
   display: grid;
+
+  @include tablet-breakpoint {
+    // set links two by two
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include desktop-breakpoint {
+    @include shift-left;
+  }
 }
 
 .location-icon {
@@ -305,6 +373,11 @@ export default {
   font-size: 13px;
   line-height: 19px;
   vertical-align: middle;
+
+  @include tablet-breakpoint {
+    font-size: 15px;
+    line-height: 22px;
+  }
 }
 
 .link-wrapper {
