@@ -76,22 +76,24 @@ export default {
 
 <template>
   <article class="article-wrapper" :class="{ 'box-shadow': lightTheme }">
+    <div class="wrapper-img-user">
+      <img :src="avatar" alt="avatar of GitHub user" class="img-user" />
+    </div>
     <div class="card-header-wrapper">
-      <div class="wrapper-img-user">
-        <img :src="avatar" alt="avatar of GitHub user" class="img-user" />
-      </div>
       <div class="header-content">
-        <h1 class="name" :class="{ 'not-available': !name }">
-          {{ name || "Not available" }}
-        </h1>
-        <div class="user-link-wrapper">
-          <a
-            :href="gitHubUrl"
-            class="user-link"
-            target="_blank"
-            rel="noopener noreferrer"
-            >@{{ login }}</a
-          >
+        <div class="user-info-wrapper">
+          <h2 class="name" :class="{ 'not-available': !name }">
+            {{ name || "Not available" }}
+          </h2>
+          <div class="user-link-wrapper">
+            <a
+              :href="gitHubUrl"
+              class="user-link"
+              target="_blank"
+              rel="noopener noreferrer"
+              >@{{ login }}</a
+            >
+          </div>
         </div>
         <div class="join-date">Joined {{ formatedDate }}</div>
       </div>
@@ -129,7 +131,7 @@ export default {
     <div class="link-container">
       <div class="link-box-1">
         <div class="link-wrapper">
-          <span class="stats-icon-wrapper">
+          <span class="link-icon-wrapper">
             <img
               src="@/assets/img/icon-location.svg"
               alt="image of location marker"
@@ -142,7 +144,7 @@ export default {
           }}</span>
         </div>
         <div class="link-wrapper">
-          <span class="stats-icon-wrapper">
+          <span class="link-icon-wrapper">
             <img
               src="@/assets/img/icon-website.svg"
               alt="icon of external link"
@@ -165,7 +167,7 @@ export default {
       <!-- /box-1 -->
       <div class="links-box-2">
         <div class="link-wrapper">
-          <span class="stats-icon-wrapper">
+          <span class="link-icon-wrapper">
             <img
               src="@/assets/img/icon-twitter.svg"
               alt="twitter icon"
@@ -183,7 +185,7 @@ export default {
           <span v-else class="link-text not-available">Not available</span>
         </div>
         <div class="link-wrapper">
-          <span class="stats-icon-wrapper">
+          <span class="link-icon-wrapper">
             <img
               src="@/assets/img/icon-company.svg"
               alt="icon of company building"
@@ -216,12 +218,14 @@ export default {
   background-color: var(--secondary-bg);
   border-radius: 1rem;
   padding: 1.6rem;
-}
 
-.card-header-wrapper {
-  display: flex;
-  margin-top: 0.53rem;
-  margin-bottom: 2.2rem;
+  @include tablet-breakpoint {
+    padding: 2.67rem;
+  }
+
+  @include desktop-breakpoint {
+    padding: 3.2rem;
+  }
 }
 
 .img-user {
@@ -229,6 +233,8 @@ export default {
   width: auto;
   border-radius: 50%;
   object-fit: cover;
+  float: left;
+  margin: 0 2rem 0rem 0;
 
   @include tablet-breakpoint {
     height: 7.8rem;
@@ -236,11 +242,28 @@ export default {
   }
 }
 
-.header-content {
-  margin-left: 2rem;
+.card-header-wrapper {
   display: flex;
-  flex-direction: column;
-  align-self: center;
+  min-height: 4.67rem; // set same height as user image
+
+  @include tablet-breakpoint {
+    min-height: 7.8rem;
+  }
+
+  @include desktop-breakpoint {
+    // allow content to top and bio below
+    min-height: initial;
+  }
+}
+
+.header-content {
+  width: 100%;
+  display: grid;
+  align-content: center;
+
+  @include desktop-breakpoint {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 .name {
@@ -274,21 +297,28 @@ export default {
     font-size: 15px;
     line-height: 22px;
   }
+
+  @include desktop-breakpoint {
+    justify-self: end;
+    line-height: 39px;
+  }
 }
 
 .user-bio {
   color: var(--primary-text);
   font-size: 13px;
   line-height: 25px;
-  margin-bottom: 2.2rem;
+  margin: 2.2rem 0;
 
   @include tablet-breakpoint {
     font-size: 15px;
     line-height: 25px;
+    margin-top: 1.6rem;
   }
 
   @include desktop-breakpoint {
     @include shift-left;
+    margin-top: 1.3rem;
   }
 }
 
@@ -373,6 +403,7 @@ export default {
   font-size: 13px;
   line-height: 19px;
   vertical-align: middle;
+  align-self: center;
 
   @include tablet-breakpoint {
     font-size: 15px;
@@ -381,13 +412,18 @@ export default {
 }
 
 .link-wrapper {
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   display: flex;
   align-content: center;
+  min-height: 2rem;
 }
 
-.stats-icon-wrapper {
-  display: inline-block;
-  width: 2.5rem;
+.link-icon-wrapper {
+  margin-right: 1rem;
+  display: flex;
+  align-self: center;
+  height: 20px;
+  width: 20px;
+  text-align: center;
 }
 </style>
