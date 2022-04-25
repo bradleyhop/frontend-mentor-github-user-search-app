@@ -141,11 +141,36 @@ export default {
       />
     </div>
   </main>
+
+  <footer class="attribution">
+    <div class="att-container">
+      Challenge by
+      <a
+        href="https://www.frontendmentor.io/challenges/github-user-search-app-Q09YOgaH6"
+        target="_blank"
+        rel="noopener noreferrer"
+        >Frontend Mentor</a
+      >.
+    </div>
+    <div class="att-container">
+      Code by
+      <a
+        href="https://bradleysmith.tech"
+        target="_blank"
+        rel="noopener noreferrer"
+        >Bradley Smith</a
+      >.
+    </div>
+  </footer>
 </template>
 
 <style lang="scss">
 body {
   background-color: var(--primary-bg);
+}
+
+main {
+  margin-bottom: 1rem;
 }
 
 .header-wrapper {
@@ -259,6 +284,24 @@ body {
   @include tablet-breakpoint {
     font-size: 16px;
     line-height: 24px;
+  }
+}
+
+.attribution {
+  color: var(--primary-text);
+  margin-bottom: 2rem;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+
+  & a {
+    color: var(--primary-text);
+    text-decoration: underline;
+  }
+
+  @include tablet-breakpoint {
+    font-size: 14px;
+    flex-direction: row;
   }
 }
 </style>
