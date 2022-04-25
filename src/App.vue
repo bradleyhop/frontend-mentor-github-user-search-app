@@ -63,6 +63,21 @@ export default {
       );
     },
   },
+
+  /*
+   * Look to see what the user has set in their browser via
+   * 'prefers-color-scheme'; set them to dark if needed.
+   * ('light' theme is set as default)
+   */
+  created() {
+    if (
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches
+    ) {
+      document.documentElement.setAttribute("data-theme", "dark");
+      this.light = false;
+    }
+  },
 };
 </script>
 
@@ -180,12 +195,21 @@ body {
 .search-icon-wrapper {
   padding: 0.5rem;
   display: flex;
+
+  @include tablet-breakpoint {
+    padding: 0.5rem 1.6rem;
+  }
 }
 
 .search-icon {
   height: 1.33rem;
   width: 1.33rem;
   align-self: center;
+
+  @include tablet-breakpoint {
+    height: 1.6rem;
+    width: 1.6rem;
+  }
 }
 
 .error-not-found {
