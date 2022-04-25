@@ -76,24 +76,20 @@ export default {
 
 <template>
   <article class="article-wrapper" :class="{ 'box-shadow': lightTheme }">
-    <div class="wrapper-img-user">
-      <img :src="avatar" alt="avatar of GitHub user" class="img-user" />
-    </div>
+    <img :src="avatar" alt="avatar of GitHub user" class="img-user" />
     <div class="card-header-wrapper">
       <div class="header-content">
         <div class="user-info-wrapper">
           <h2 class="name" :class="{ 'not-available': !name }">
             {{ name || "Not available" }}
           </h2>
-          <div class="user-link-wrapper">
-            <a
-              :href="gitHubUrl"
-              class="user-link"
-              target="_blank"
-              rel="noopener noreferrer"
-              >@{{ login }}</a
-            >
-          </div>
+          <a
+            :href="gitHubUrl"
+            class="user-link"
+            target="_blank"
+            rel="noopener noreferrer"
+            >@{{ login }}</a
+          >
         </div>
         <div class="join-date">Joined {{ formatedDate }}</div>
       </div>
@@ -230,7 +226,7 @@ export default {
 
 .img-user {
   height: 4.67rem;
-  width: auto;
+  width: 4.67rem;
   border-radius: 50%;
   object-fit: cover;
   float: left;
@@ -371,6 +367,7 @@ export default {
   @include tablet-breakpoint {
     // set links two by two
     grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1rem;
   }
 
   @include desktop-breakpoint {
