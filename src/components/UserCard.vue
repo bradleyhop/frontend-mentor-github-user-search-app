@@ -56,6 +56,12 @@ export default {
     },
   },
 
+  data() {
+    return {
+      imageLoading: true,
+    };
+  },
+
   computed: {
     // convert date string to object; return day month year
     formatedDate() {
@@ -71,12 +77,27 @@ export default {
       return this.twitter ? "https:twitter.com" + this.twitter : null;
     },
   },
+
+  watch: {
+    avatar: function () {
+      this.imageLoading = true;
+    },
+  },
 };
 </script>
 
 <template>
   <article class="article-wrapper" :class="{ 'box-shadow': lightTheme }">
-    <img :src="avatar" alt="avatar of GitHub user" class="img-user" />
+    <!-- must have vue's :key so that fade-in effect applies to each image load -->
+    <!-- using vue's @load to hide image alt text as image is being downloaded -->
+    <img
+      :src="avatar"
+      :key="avatar"
+      :style="{ visibility: imageLoading ? 'hidden' : 'visible' }"
+      @load="imageLoading = false"
+      alt="avatar of GitHub user"
+      class="user-img"
+    />
     <div class="card-header-wrapper">
       <div class="header-content">
         <div class="user-info-wrapper">
@@ -224,17 +245,20 @@ export default {
   }
 }
 
-.img-user {
+.user-img {
+  background-color: var(--secondary-bg);
   height: 4.67rem;
   width: 4.67rem;
   border-radius: 50%;
   object-fit: cover;
   float: left;
-  margin: 0 2rem 0rem 0;
+  margin-right: 2rem;
+  // fade in image on load
+  @include fade-in;
 
   @include tablet-breakpoint {
     height: 7.8rem;
-    width: auto;
+    width: 7.8rem;
   }
 }
 

@@ -187,6 +187,9 @@ main {
   cursor: pointer;
   justify-self: end; // in relation to parent's grid
   display: flex; // to help with centering in children
+
+  // fade in text on change
+  @include fade-in;
 }
 
 .button-text {
@@ -269,6 +272,7 @@ main {
   // same colors for both themes
   background-color: $bright-blue;
   color: #fff;
+  cursor: pointer;
   border-style: none;
   border-radius: 0.67rem;
   font-weight: 700;
@@ -276,9 +280,11 @@ main {
   font-size: 14px;
   line-height: 21px;
   padding: 0.83rem 1.2rem;
+  // a little flair on changing background color
+  transition: background-color 0.1s;
 
-  &:hover {
-    cursor: pointer;
+  &:active {
+    background-color: $active-blue;
   }
 
   @include tablet-breakpoint {
@@ -295,8 +301,11 @@ main {
   flex-direction: column;
 
   & a {
-    color: var(--primary-text);
-    text-decoration: underline;
+    color: $bright-blue;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   @include tablet-breakpoint {
