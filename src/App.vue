@@ -88,13 +88,19 @@ export default {
     <button v-if="light" class="theme-button" @click="changeTheme">
       <span class="button-text">Dark&nbsp;</span
       ><span class="button-img-container"
-        ><img class="button-img" src="@/assets/img/icon-moon.svg"
+        ><img
+          class="button-img"
+          src="@/assets/img/icon-moon.svg"
+          alt="icon of moon for dark theme"
       /></span>
     </button>
     <button v-else class="theme-button" @click="changeTheme">
       <span class="button-text">Light&nbsp;</span
       ><span class="button-img-container">
-        <img src="@/assets/img/icon-sun.svg" class="button-img"
+        <img
+          src="@/assets/img/icon-sun.svg"
+          class="button-img"
+          alt="icon of sun for light theme"
       /></span>
     </button>
     <!-- /v-iv /v-else -->
@@ -202,6 +208,8 @@ main {
 
 .button-img {
   align-self: center;
+  width: 1.33rem;
+  height: 1.33rem;
 }
 
 .search-bar-wrapper {
