@@ -60,13 +60,19 @@ Users should be able to:
 - More practice with flexbox and grid; I'm trying to figure out when to use one
   or the other.
 - More practice with building an app from a design file (Figma).
+- Reading the user's preference for light or dark themes to set the theme of the
+    app appropriately.
+- I trying to use CSS grid more often to better understand when I would use grid
+    vs flexbox; in general, grid is nice for elements of consistant size while
+    flex is good for elements differing in size and flowing elements (also good
+    for vertically aligning elements within a div vertically).
 - One of the more frustrating aspects of this project, and most of the
-    interactive projects on Frontend Mentor, is that the user stories are not
-    really detailed enough for me. Is there a default profile to be loaded by
-    default? In the Figma design file, the pointer icons show interactivity, which
-    can be ambiguous in its implementation. However, I can see where this
-    ambiguity leaves room for imagination, so I had fun adding little flairs and
-    app flow.
+  interactive projects on Frontend Mentor, is that the user stories are not
+  really detailed enough for me. Is there a default profile to be loaded by
+  default? In the Figma design file, the pointer icons show interactivity, which
+  can be ambiguous in its implementation. However, I can see where this
+  ambiguity leaves room for imagination, so I had fun adding little flairs and
+  app flow.
 
 ### Continued development
 
@@ -78,7 +84,11 @@ Users should be able to:
   thread helped me to determine what I needed and how to implement the
   Ocktokit api.
 - [Using custom html attribute and CSS variables to set color theme](https://dev.to/ananyaneogi/create-a-dark-light-mode-switch-with-css-variables-34l8) - I used this article as a launch point in implementing dark and light themes for the app.
-
+- [Serving the static site on GitHub Pages using gh-pages](https://www.npmjs.com/package/gh-pages) - I always forget how to serve the app build from a subtree, so like most
+  challenges I find -- there's a npm package for that ;) For my use case, I
+  only need to install and save the package, and then add
+  `"deploy": "npm run build && gh-pages --dist 'dist' --branch 'release'"`
+  under the `"scripts"` object in my package.json file.
 
 ## Author
 
