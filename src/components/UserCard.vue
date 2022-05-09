@@ -74,7 +74,7 @@ export default {
 
     // format twitter user account link
     twitterLink() {
-      return this.twitter ? "https:twitter.com" + this.twitter : null;
+      return this.twitter ? "https:twitter.com/" + this.twitter : null;
     },
   },
 
@@ -196,6 +196,7 @@ export default {
             :href="twitterLink"
             v-if="twitter"
             class="link-text"
+            target="_blank"
             rel="noopener noreferrer"
             >@{{ twitter }}</a
           >
