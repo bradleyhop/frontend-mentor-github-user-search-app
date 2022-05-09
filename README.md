@@ -1,6 +1,6 @@
 # Frontend Mentor - GitHub user search app solution
 
-This is my solution to the [GitHub user search app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/github-user-search-app-Q09YOgaH6). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
+This is my solution to the [GitHub user search app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/github-user-search-app-Q09YOgaH6). Frontend Mentor challenges help you improve your coding skills by building realistic projects. [Live site here.](https://bradleyhop.github.io/frontend-mentor-github-user-search-app/)
 
 ## Table of contents
 
@@ -15,8 +15,6 @@ This is my solution to the [GitHub user search app challenge on Frontend Mentor]
   - [Useful resources](#useful-resources)
 - [Author](#author)
 
-**Note: Delete this note and update the table of contents based on what sections you keep.**
-
 ## Overview
 
 ### The challenge
@@ -30,9 +28,9 @@ Users should be able to:
 - Switch between light and dark themes
 - **Bonus**: Have the correct color scheme chosen for them based on their computer preferences. _Hint_: Research `prefers-color-scheme` in CSS.
 
-    I have met all the user stories listed about along with the bonus challenge
-    of checking to see if the user has set a light or dark theme preference and
-    setting the app theme appropriately.
+  I have met all the user stories listed about along with the bonus challenge
+  of checking to see if the user has set a light or dark theme preference and
+  setting the app theme appropriately.
 
 ### Screenshot
 
@@ -56,27 +54,34 @@ Users should be able to:
 - [Vite](https://vitejs.dev/) - Vite Frontend Tooling
 - [SCSS](https://sass-lang.com/) - For styling
 
-
 ### What I learned
 
 - How to change the app theme with a custom attribute and javascript.
 - More practice with flexbox and grid; I'm trying to figure out when to use one
-    or the other.
+  or the other.
 - More practice with building an app from a design file (Figma).
+- One of the more frustrating aspects of this project, and most of the
+    interactive projects on Frontend Mentor, is that the user stories are not
+    really detailed enough for me. Is there a default profile to be loaded by
+    default? In the Figma design file, the pointer icons show interactivity, which
+    can be ambiguous in its implementation. However, I can see where this
+    ambiguity leaves room for imagination, so I had fun adding little flairs and
+    app flow.
 
 ### Continued development
 
-
 ### Useful resources
 
-- [Example resource 1](https://www.example.com) - This helped me for XYZ reason. I really liked this pattern and will use it going forward.
-- [Example resource 2](https://www.example.com) - This is an amazing article which helped me finally understand XYZ. I'd recommend it to anyone still learning this concept.
+- [Ocktokit and isomorphic-fetch](https://github.com/octokit/octokit.js/issues/2126#issuecomment-1005023857) - The Ocktokit api was given by
+  the project outline as a resource to interact with the GitHub user api. To
+  use it in my client-side app, I had to install another npm package. This
+  thread helped me to determine what I needed and how to implement the
+  Ocktokit api.
+- [Using custom html attribute and CSS variables to set color theme](https://dev.to/ananyaneogi/create-a-dark-light-mode-switch-with-css-variables-34l8) - I used this article as a launch point in implementing dark and light themes for the app.
 
-**Note: Delete this note and replace the list above with resources that helped you during the challenge. These could come in handy for anyone viewing your solution or for yourself when you look back on this project in the future.**
 
 ## Author
 
 - Website - [Bradley Smith](https://bradleysmith.tech)
 - Frontend Mentor -
-    [@bradleyhop](https://www.frontendmentor.io/profile/bradleyhop)
-
+  [@bradleyhop](https://www.frontendmentor.io/profile/bradleyhop)
