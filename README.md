@@ -32,6 +32,11 @@ Users should be able to:
   of checking to see if the user has set a light or dark theme preference and
   setting the app theme appropriately.
 
+  I have also have the app load a default GitHub user card on loading, the
+  Octocat, instead of just having the search bar on load. Having a card
+  displayed on load gives the user an idea of what to expect on how to use and
+  what information will be available with this app.
+
 ### Screenshot
 
 ![Screenshot of github user search app](./ghApp.png)
@@ -62,7 +67,7 @@ Users should be able to:
 - More practice with building an app from a design file (Figma).
 - Reading the user's preference for light or dark themes to set the theme of the
     app appropriately.
-- I trying to use CSS grid more often to better understand when I would use grid
+- I am using CSS Grid more often to better understand when I would use grid
     vs flexbox; in general, grid is nice for elements of consistant size while
     flex is good for elements differing in size and flowing elements (also good
     for vertically aligning elements within a div vertically).
@@ -78,11 +83,11 @@ Users should be able to:
 
 ### Useful resources
 
-- [Ocktokit and isomorphic-fetch](https://github.com/octokit/octokit.js/issues/2126#issuecomment-1005023857) - The Ocktokit api was given by
-  the project outline as a resource to interact with the GitHub user api. To
+- [Ocktokit and isomorphic-fetch](https://github.com/octokit/octokit.js/issues/2126#issuecomment-1005023857) - The Ocktokit API was given by
+  the project outline as a resource to interact with the GitHub user API. To
   use it in my client-side app, I had to install another npm package. This
   thread helped me to determine what I needed and how to implement the
-  Ocktokit api.
+  Ocktokit API.
 - [Using custom html attribute and CSS variables to set color theme](https://dev.to/ananyaneogi/create-a-dark-light-mode-switch-with-css-variables-34l8) - I used this article as a launch point in implementing dark and light themes for the app.
 - [Serving the static site on GitHub Pages using gh-pages](https://www.npmjs.com/package/gh-pages) - I always forget how to serve the app build from a subtree, so like most
   challenges I find -- there's a npm package for that ;) For my use case, I
