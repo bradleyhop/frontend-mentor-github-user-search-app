@@ -1,7 +1,7 @@
 <script>
 // component rendered after successful user search
 import UserCard from "./components/UserCard.vue";
-// access GitHub user api
+// access GitHub user API
 import { Octokit } from "@octokit/core";
 
 export default {
@@ -13,7 +13,7 @@ export default {
     return {
       light: true, // light or dark theme
       userSearch: "", // user input search
-      data: null, // data returned by GitHub api
+      data: null, // data returned by GitHub API
       error: false, // check if error returned
       errorMessage: "No results", // default error message
     };
@@ -77,6 +77,11 @@ export default {
       document.documentElement.setAttribute("data-theme", "dark");
       this.light = false;
     }
+  },
+
+  mounted() {
+    // load a default user card on load, the GitHub mascot 'Octocat'
+    this.fetchApi("Octocat");
   },
 };
 </script>
